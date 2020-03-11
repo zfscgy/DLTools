@@ -1,4 +1,4 @@
-from Data.RatingSequenceLoader import RatingSeqDataLoader
+from Data.MovielensLoader import MovielensLoader
 from Data.AnimeFacesLoader import AnimeFacesLoader
 from Data.OmniglotLoader import OmniglotLoader
 from Data.LFWLoader import LFWLoader

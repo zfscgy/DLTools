@@ -33,7 +33,8 @@ class LFWLoader:
         :param batch_size:
         :param support_size:
         :param train:
-        :return:
+        :return: [batch_size * support_size, 224, 224, 3], [batch_size * support_size, 224, 224, 3], (range from [0, 1] )
+                    [batch_size * support_size] range {0, 1}, 1 for match, 0 for not match
         """
         if train:
             paths = self.paths[:self.train_len]
@@ -61,7 +62,7 @@ class LFWLoader:
                 labels.append(0)
         return np.array(imgs0).astype(np.float32)/255, \
                np.array(imgs1).astype(np.float32)/255, \
-               np.array(labels)[:, np.newaxis]
+               np.array(labels)
 
     def get_train_batch(self, batch_size, support_size=2):
         return self._get_batch(batch_size, support_size, train=True)

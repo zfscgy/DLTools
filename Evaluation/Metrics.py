@@ -12,8 +12,8 @@ from sklearn.metrics import accuracy_score
 def binary_cross_entropy(targets, predictions, epsilon=1e-9):
     """
 
-    :param targets:  [n_batches], range [0, 1]
-    :param predictions:  [n_batches], range [0, 1]
+    :param targets:  [batch_size], range [0, 1]
+    :param predictions:  [batch_size], range [0, 1]
     :param epsilon: In order to handle extreme predictions close to 0 or 1
     :return:
     """
@@ -24,8 +24,8 @@ def binary_cross_entropy(targets, predictions, epsilon=1e-9):
 
 def binary_accuracy(y_true, y_pred):
     """
-    :param y_true: [n_batches], range [0, 1]
-    :param y_pred: [n_batches], range [0, 1]
+    :param y_true: [batch_size], range [0, 1]
+    :param y_pred: [batch_size], range [0, 1]
     :return:
     """
     matches = np.sum(np.abs(y_true - y_pred) < 0.5) + np.sum(np.abs(y_true - y_pred) == 0.5) / 2
@@ -43,8 +43,8 @@ def binary_accuracy(y_true, y_pred):
 
 def top1_accuracy(y_true: np.ndarray, y_pred: np.ndarray):
     """
-    :param y_pred: shape [n_batches, pred_len] range [0, 1]
-    :param y_true: shape [n_batches] range integer in [0, pred_len)
+    :param y_pred: shape [batch_size, pred_len] range [0, 1]
+    :param y_true: shape [batch_size] range integer in [0, pred_len)
     :return:
     """
     batch_size = y_pred.shape[0]
@@ -79,8 +79,8 @@ def hit_ratio(y_true: np.ndarray, y_pred: np.ndarray):
 
 def cross_entropy(y_true: np.ndarray, y_pred: np.ndarray, epsilon=1e-9):
     """
-    :param y_true: shape [n_batches, n_classes] range in [0, 1] and sum to 1 (should be outputs of softmax)
-    :param y_pred: shape [n_batches, n_classes] range in [0, 1]
+    :param y_true: shape [batch_size, n_classes] range in [0, 1] and sum to 1 (should be outputs of softmax)
+    :param y_pred: shape [batch_size, n_classes] range in [0, 1]
     :param epsilon:
     :return:
     """
@@ -91,8 +91,8 @@ def cross_entropy(y_true: np.ndarray, y_pred: np.ndarray, epsilon=1e-9):
 def discounted_cumulative_gain(y_true: np.ndarray, y_pred: np.ndarray):
     """
     Formula: sum rel_i / log2(i + 1)
-    :param y_true: shape [n_batches, n_items]
-    :param y_pred: shape [n_batches]
+    :param y_true: shape [batch_size, n_items]
+    :param y_pred: shape [batch_size]
     :return:
     """
     batch_size = y_pred.shape[0]
